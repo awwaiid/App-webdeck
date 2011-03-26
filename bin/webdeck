@@ -1,0 +1,23 @@
+#!/usr/bin/perl
+
+use strict;
+use lib '/home/awwaiid/projects/perl/Continuity/lib';
+
+use everywhere '5.010; use MooseX::Declare',
+  matching => '^App/WebDeck';
+
+use Continuity;
+use App::WebDeck;
+
+my $server = Continuity->new(
+  query_session  => 'sid',
+  cookie_session => 0,
+  callback       => sub {
+    my $app = App::WebDeck->new( request => shift );
+    $app->main();
+  },
+  debug_level => 2,
+);
+
+return $server->loop;
+

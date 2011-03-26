@@ -1,0 +1,63 @@
+
+* {
+  margin: 0;
+}
+
+html, body {
+  padding: 0;
+  border: 0;
+  background-color: #fff;
+  height: 100%;
+}
+
+#not-footer {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -120px; // same as #footer height
+}
+
+#footer, #footer-push {
+  height: 120px;
+}
+
+#footer {
+  padding-left: 0.5em;
+  background-color: #444;
+  color: #fff;
+}
+
+#header {
+  margin: 0;
+  padding: 0.5em;
+  border: 0 0 1px 0;
+  border-color: 1px solid black;
+  background-color: #444;
+  color: #fff;
+  height: 50px;
+}
+
+#header h2, h3 {
+  margin: 0;
+  padding: 0;
+}
+
+#logo {
+  float: left;
+  align: left;
+}
+
+#loginout {
+  float: right;
+  text-align: right;
+}
+
+.card {
+  position: absolute;
+}
+
+#thetable {
+  background-color: #060;
+  color: #fff;
+  padding: 1em;
+}
