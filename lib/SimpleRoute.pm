@@ -50,6 +50,7 @@ sub route {
           || all { defined $matches{$_} && $matches{$_} =~ /$validation->{$_}/ }
             keys %$validation) {
         $path =~ /^$route\/?$/; # Re-fix %+
+        $_ = { %matches };
         $action->(%matches);
         last;
       } else {
