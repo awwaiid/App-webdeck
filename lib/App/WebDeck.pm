@@ -7,7 +7,7 @@ App::WebDeck - A Web-Based Deck of Cards Server
 
 =cut
 
-use SimpleRoute;
+use App::WebDeck::SimpleRoute;
 use Continuity;
 use Template::Semantic;
 use Coro::AnyEvent;

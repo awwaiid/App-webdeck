@@ -1,4 +1,4 @@
-package SimpleRoute;
+package App::WebDeck::SimpleRoute;
 
 =head1 NAME
 
