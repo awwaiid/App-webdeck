@@ -1,6 +1,12 @@
 
 class App::WebDeck {
 
+=head1 NAME
+
+App::WebDeck - A Web-Based Deck of Cards Server
+
+=cut
+
 use SimpleRoute;
 use Continuity;
 use Template::Semantic;
@@ -10,12 +16,12 @@ use List::MoreUtils qw/all/;
 use Data::Dumper;
 
 our $movewatch = AnyEvent->condvar;
+our @movewatch_list = ();
 our $deck = [];
 
 has request => (is => 'rw');
 
-has deck => (is => 'rw', default => sub { [] });
-
+# has deck => (is => 'rw', default => sub { [] });
 # has movewatch => (is => 'rw', default => sub { AnyEvent->condvar });
 
 method initialize_deck {
@@ -55,9 +61,11 @@ method stream {
 
   # Now we'll stream them updates
   while(1) {
+    my $watcher = AnyEvent->condvar;
+    push @movewatch_list, $watcher;
     say "Waiting for movewatch";
-    say "Current movewatch: " . $movewatch;
-    my ($id) = $movewatch->recv; # wait for a move
+    say "Current movewatch: " . $watcher;
+    my ($id) = $watcher->recv; # wait for a move
     say "GOT movewatch! id: $id";
     say Dumper($deck->[$id]);
     $self->request->print(encode_json({
@@ -66,8 +74,6 @@ method stream {
       x => $deck->[$id]->{x},
       y => $deck->[$id]->{y},
       z => $deck->[$id]->{z},
-      # x => 100,
-      # y => 100,
       sid => $self->request->session_id,
     }));
     $self->request->next;
@@ -83,11 +89,11 @@ method movecard($id, $x, $y, $z) {
 
   say "Current movewatch: " . $movewatch;
   say "Sending movewatch $id";
-  $movewatch->send($id);
-  Coro::AnyEvent::idle;
+  while(my $watcher = shift @movewatch_list) {
+    $watcher->send($id);
+  }
 
-  # And set up a new movewatch condvar
-  $movewatch = AnyEvent->condvar;
+  $self->request->print("Card moved!");
 }
 
 method main {
