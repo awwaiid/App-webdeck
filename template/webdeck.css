@@ -54,6 +54,8 @@ html, body {
 
 .card {
   position: absolute;
+  top: 130px;
+  left: 10px;
 }
 
 #thetable {

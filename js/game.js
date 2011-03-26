@@ -51,7 +51,7 @@ function poll_server(sid) {
 
 function start_poll_stream() {
   $.getJSON('/stream', function(data) {
-    alert("Starting stream on sid " + data.sid);
+    // alert("Starting stream on sid " + data.sid);
     poll_server(data.sid);
   });
 }
