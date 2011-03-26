@@ -91,7 +91,7 @@ sub route {
 
 =head1 SEE ALSO
 
-There are a bunch of modules just like this one but different. Miyagawa has gathered a lovely list of ones that can be used with Plack over at L< https://github.com/miyagawa/plack-dispatching-samples >. Notably, the closest to this interface is the one provided by L<Mojolicious::Lite>.
+There are a bunch of modules just like this one but different. Miyagawa has gathered a lovely list of ones that can be used with Plack over at L<https://github.com/miyagawa/plack-dispatching-samples>. Notably, the closest to this interface is the one provided by L<Mojolicious::Lite>.
 
 =head1 AUTHOR
 
