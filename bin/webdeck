@@ -1,7 +1,18 @@
 #!/usr/bin/perl
 
 use strict;
+
+BEGIN {
+  unless ($ENV{PLACK_ENV}) {
+    exec('twiggy', $0)
+      or print STDERR "Couldn't use twiggy, falling back to HttpDaemon\n";
+  }
+}
+
 use lib '/home/awwaiid/projects/perl/Continuity/lib';
+
+use File::ShareDir;
+our $share_dir = File::ShareDir::dist_dir('App-WebDeck');
 
 use everywhere '5.010; use MooseX::Declare',
   matching => '^App/WebDeck';
@@ -12,6 +23,7 @@ use App::WebDeck;
 my $server = Continuity->new(
   query_session  => 'sid',
   cookie_session => 0,
+  docroot        => $share_dir,
   callback       => sub {
     my $app = App::WebDeck->new( request => shift );
     $app->main();

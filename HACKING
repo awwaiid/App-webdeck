@@ -1,0 +1,5 @@
+I'm still getting used to this Dist::Zilla thing, so here's a tip. To start up
+the server while you're developing, do this:
+
+  dzil run 'twiggy bin/webdeck'
+
