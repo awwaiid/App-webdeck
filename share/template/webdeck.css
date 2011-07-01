@@ -6,8 +6,8 @@
 html, body {
   padding: 0;
   border: 0;
-  background-color: #fff;
   height: 100%;
+  background-color: #060;
 }
 
 #not-footer {

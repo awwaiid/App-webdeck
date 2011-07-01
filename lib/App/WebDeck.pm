@@ -92,6 +92,7 @@ method movecard(:$id, :$x, :$y, :$z) {
 
   # Output something so that the AJAX request won't get mad :)
   $self->request->print("Card moved!");
+  # close session HERE
 }
 
 method main {
