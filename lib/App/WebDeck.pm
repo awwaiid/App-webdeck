@@ -19,11 +19,11 @@ use File::ShareDir;
 our @movewatch_list = ();
 our $deck = [];
 
-our $share_dir = File::ShareDir::dist_dir('App-WebDeck');
-
+has docroot => (is => 'rw');
 has request => (is => 'rw');
 
 method initialize_deck {
+  my $share_dir = $self->docroot;
   say STDERR "Looking at ls $share_dir/img/classic-jokers/card*.png";
   my @card_paths = `ls $share_dir/img/classic-jokers/card*.png`;
   @card_paths = map { chomp ; $_ } @card_paths;
@@ -44,7 +44,7 @@ method index {
     $self->initialize_deck;
   }
   $self->request->print(
-    Template::Semantic->process("$share_dir/template/hello.html" => {
+    Template::Semantic->process($self->docroot . "/template/hello.html" => {
       'title, #header h2' => 'WebDeck',
       '#thetable h2' => $self->request->session_id,
       '#thetable div.card' => [

@@ -12,7 +12,8 @@ BEGIN {
 use lib '/home/awwaiid/projects/perl/Continuity/lib';
 
 use File::ShareDir;
-our $share_dir = File::ShareDir::dist_dir('App-WebDeck');
+our $share_dir = eval { File::ShareDir::dist_dir('App-WebDeck') };
+$share_dir = 'share' if $@ && -d 'share'; # for development mode
 
 use everywhere '5.010; use MooseX::Declare',
   matching => '^App/WebDeck';
@@ -25,7 +26,7 @@ my $server = Continuity->new(
   cookie_session => 0,
   docroot        => $share_dir,
   callback       => sub {
-    my $app = App::WebDeck->new( request => shift );
+    my $app = App::WebDeck->new( request => shift, docroot => $share_dir );
     $app->main();
   },
   debug_level => 2,
