@@ -48,7 +48,8 @@ method index {
       'title, #header h2' => 'WebDeck',
       '#thetable h2' => $self->request->session_id,
       '#thetable div.card' => [
-        map { { 'img@src' => $_->{path}, 'img@id' => "card$_->{id}" } } @{ $deck }
+        map { { 'img@src' => $_->{path}, 'img@id' => "card$_->{id}" } }
+        @$deck
       ],
     })
   );

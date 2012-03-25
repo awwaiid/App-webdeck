@@ -9,8 +9,6 @@ BEGIN {
   }
 }
 
-use lib '/home/awwaiid/projects/perl/Continuity/lib';
-
 use File::ShareDir;
 our $share_dir = eval { File::ShareDir::dist_dir('App-WebDeck') };
 $share_dir = 'share' if $@ && -d 'share'; # for development mode
